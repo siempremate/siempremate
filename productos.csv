@@ -1,0 +1,10 @@
+activo,seccion,nombre,precio,etiqueta,blonda,blonda_estilo,frase,caracteristicas,variantes,fotos
+si,destacado,Box especial Día de la Madre,39900,,Oferta especial,,"Mate y bombilla grabados con “Te amo mamá”, en caja de presentación.",Caja de presentación | Mate Camionero de algarrobo | Brilloso laqueado | Bombilla chata | Todo grabado “Te amo mamá”,,box-madre-1.jpg | box-madre-2.jpg | box-madre-3.jpg
+si,principal,Combo Mamá,15000,¡Bombilla de regalo!,Combo Mamá,izquierda,,"Térmico vaso copita, color rosa | Interior térmico de acero inoxidable | Bombilla pico de loro de acero inoxidable, filtro pala corta",,combo-mama-1.jpg
+si,principal,Camionero,24900,¡Bombilla de regalo!,Oferta especial,izquierda,,"Algarrobo, brilloso laqueado | Virola de acero | Bombilla pico de loro de acero inoxidable, filtro pala corta",,camionero-1.jpg | camionero-3.jpg
+si,principal,Ranchero,30000,,,,¡El que no te puede faltar!,Trabajo artesanal | Algarrobo | Moldeado y pintado a mano,Blanco | Rosa,ranchero-blanco.jpg | ranchero-rosa.jpg | ranchero-mano.jpg
+si,catalogo,Calabaza,20000,,,,,Mate de calabaza | Virola | Recubierto en PVC,,calabaza.jpg
+si,catalogo,Malvinas Argentinas,24900,,Combo especial,celeste izquierda,,Imperial de goma | Interior térmico,Blanco | Negro,malvinas-blanco.jpg | malvinas-negro.jpg
+si,catalogo,Imperial,30000,,,,,Algarrobo | Madera laqueada | Guarda de acero,,imperial-acero.jpg
+si,catalogo,Imperial Premium,35000,,,,,Algarrobo | Madera laqueada | Guarda de alpaca,,imperial-alpaca.jpg
+si,catalogo,Torpedo,65000,,,,¡La joya de la corona!,Cuero croco | Base ancha | Virola de alpaca cincelada | Anillo de bronce negro,,torpedo-1.jpg | torpedo-2.jpg

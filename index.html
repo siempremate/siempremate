@@ -1,0 +1,870 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Siempre Mate | Mates y combos para regalar</title>
+<meta name="description" content="Box especial Día de la Madre, combos con bombilla de regalo, camionero, ranchero, imperial y más. Elegí tu mate y pedilo por WhatsApp.">
+<meta name="theme-color" content="#FFEFDD">
+<meta property="og:title" content="Siempre Mate">
+<meta property="og:description" content="Elegí tu mate y pedilo por WhatsApp.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%89%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700&family=Bodoni+Moda:ital,opsz,wght@1,6..96,400..800&display=swap" rel="stylesheet">
+<style>
+/* ---------- Paleta y tipografía de la marca ---------- */
+:root{
+  color-scheme: light;
+  --crema: #FFEFDD;        /* fondo de la marca */
+  --ficha: #FEE6C4;        /* crema de las fichas de producto */
+  --verde: #426C5E;        /* verde del logo */
+  --verde-prof: #2A463D;   /* verde para texto corrido */
+  --naranja: #E56D24;      /* naranja del logo */
+  --naranja-texto: #B4470F;/* naranja legible en letra chica */
+  --kraft: #BF7F45;        /* cartón de los stickers */
+  --papel: #FBF7F0;
+
+  --display: 'Bodoni Moda', 'Bodoni MT', Didot, 'Times New Roman', serif;
+  --texto: 'Albert Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --ancho: 1120px;
+  --lado: clamp(18px, 4.5vw, 40px);
+  --r-foto: 22px;
+  --r-ficha: 28px;
+
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+*, *::before, *::after{ box-sizing: inherit; }
+html{ scroll-padding-top: env(safe-area-inset-top, 0px); -webkit-text-size-adjust: 100%; }
+body{
+  margin: 0;
+  background: var(--crema);
+  color: var(--verde-prof);
+  font: 400 1.0625rem/1.5 var(--texto);
+}
+img{ display: block; max-width: 100%; height: auto; }
+h1, h2, h3, p, ul, ol, fieldset{ margin: 0; padding: 0; }
+ul, ol{ list-style: none; }
+fieldset{ border: 0; min-width: 0; }
+a{ color: inherit; }
+:focus-visible{ outline: 3px solid var(--naranja); outline-offset: 3px; border-radius: 6px; }
+.solo-lector{
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap;
+}
+
+/* ---------- Botones ---------- */
+.boton{
+  display: inline-flex; align-items: center; justify-content: center; gap: .55em;
+  min-height: 50px; padding: .7em 1.5em;
+  border: 2px solid var(--verde); border-radius: 999px;
+  background: var(--verde); color: var(--crema);
+  font: 600 1rem/1.1 var(--texto); text-decoration: none; white-space: nowrap;
+  transition: background-color .15s, border-color .15s, color .15s;
+}
+.boton:hover{ background: var(--verde-prof); border-color: var(--verde-prof); }
+.boton svg{ width: 1.25em; height: 1.25em; flex: none; fill: currentColor; }
+.boton--linea{ background: transparent; color: var(--verde); }
+.boton--linea:hover{ background: var(--verde); color: var(--crema); }
+.boton--claro{ background: var(--crema); border-color: var(--crema); color: var(--verde-prof); }
+.boton--claro:hover{ background: #fff; border-color: #fff; }
+.boton--ancho{ width: 100%; }
+
+/* ---------- Cabecera ---------- */
+.cabecera{
+  max-width: var(--ancho); margin: 0 auto;
+  padding: 14px var(--lado);
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.cabecera__marca img{ width: clamp(132px, 34vw, 190px); }
+.cabecera__nav{ display: flex; align-items: center; gap: clamp(12px, 3vw, 24px); }
+.cabecera__ig{ font-weight: 600; color: var(--verde); text-underline-offset: 4px; }
+.cabecera .boton{ min-height: 44px; padding: .5em 1.2em; }
+
+/* ---------- Precio, nombre, etiqueta (como en las fichas) ---------- */
+.precio{
+  font: italic 500 2.6rem/1 var(--display);
+  color: var(--verde); letter-spacing: -.01em; white-space: nowrap;
+}
+.precio__signo{ font-size: .5em; vertical-align: .62em; margin-right: .12em; }
+.nombre{
+  font: italic 700 1.5rem/1.1 var(--display);
+  letter-spacing: .09em; text-transform: uppercase; color: var(--verde);
+  text-wrap: balance;
+}
+.etiqueta{
+  font: italic 700 1.02rem/1.2 var(--display);
+  letter-spacing: .08em; text-transform: uppercase; color: var(--naranja-texto);
+}
+.frase{ font: italic 500 1.15rem/1.3 var(--display); }
+
+/* ---------- Galería ---------- */
+.galeria__marco{
+  aspect-ratio: 4 / 5; overflow: hidden;
+  border-radius: var(--r-foto); background: var(--ficha);
+}
+.galeria__foto{ width: 100%; height: 100%; object-fit: cover; }
+.galeria__minis{ display: flex; gap: 8px; margin-top: 10px; }
+.mini{
+  width: 52px; aspect-ratio: 4 / 5; padding: 0; border: 0; overflow: hidden;
+  border-radius: 10px; background: var(--ficha); cursor: pointer;
+  outline: 2px solid transparent; outline-offset: 2px; opacity: .72;
+}
+.mini img{ width: 100%; height: 100%; object-fit: cover; }
+.mini[aria-pressed="true"]{ outline-color: var(--verde); opacity: 1; }
+.mini:hover{ opacity: 1; }
+
+/* ---------- Blonda (medallón hecho por código) ---------- */
+.galeria, .diptico{ position: relative; }
+.sticker{
+  --d: 104px; --borde: var(--kraft); --tinta: #A9682F; --centro: var(--papel);
+  position: absolute; z-index: 1; top: -12px; right: -8px;
+  width: var(--d); height: var(--d);
+  display: grid; place-items: center; transform: rotate(-9deg); pointer-events: none;
+}
+.sticker--izq{ right: auto; left: -8px; }
+.sticker--celeste{ --borde: #74ACDF; --tinta: #2E78B7; --centro: #FFFFFF; }
+.sticker--verde{ --borde: var(--verde); --tinta: var(--verde); }
+.sticker--naranja{ --borde: var(--naranja); --tinta: var(--naranja-texto); }
+.sticker svg{ position: absolute; inset: 0; width: 100%; height: 100%; }
+.sticker__borde{ fill: var(--borde); }
+.sticker__centro{ fill: var(--centro); }
+.sticker__hilo{ fill: none; stroke: var(--borde); stroke-width: .7; opacity: .75; }
+.sticker span{
+  position: relative; width: 68%; text-align: center; text-wrap: balance;
+  font: italic 800 calc(var(--d) * .118)/1.05 var(--display);
+  letter-spacing: .06em; text-transform: uppercase; color: var(--tinta);
+}
+.catalogo .sticker{ --d: 86px; top: -10px; right: -6px; }
+.catalogo .sticker--izq{ right: auto; left: -6px; }
+@media (min-width: 720px){
+  .sticker{ --d: 120px; top: -16px; right: -12px; }
+  .sticker--izq{ right: auto; left: -12px; }
+  .catalogo .sticker{ --d: 98px; top: -12px; right: -10px; }
+  .catalogo .sticker--izq{ right: auto; left: -10px; }
+}
+
+/* ---------- Variantes (color) ---------- */
+.variantes{ display: flex; flex-wrap: wrap; gap: 8px; }
+.chip{ position: relative; cursor: pointer; }
+.chip input{ position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.chip span{
+  display: inline-flex; align-items: center; min-height: 40px; padding: 0 1.1em;
+  border: 1.5px solid currentColor; border-radius: 999px;
+  font-weight: 600; font-size: .95rem;
+}
+.chip input:checked + span{ background: var(--verde); border-color: var(--verde); color: var(--crema); }
+.chip input:focus-visible + span{ outline: 3px solid var(--naranja); outline-offset: 3px; }
+
+/* ---------- 1. Destacado de temporada ---------- */
+.destacado{ max-width: var(--ancho); margin: 0 auto; padding: 6px var(--lado) 0; }
+.destacado .producto{ display: grid; gap: 22px; }
+.destacado .galeria__marco{ border-radius: var(--r-ficha); }
+
+.destacado .sticker{ --d: 112px; top: -14px; animation: pegar .55s cubic-bezier(.2, 1.5, .4, 1) .35s both; }
+@keyframes pegar{ from{ opacity: 0; transform: rotate(-30deg) scale(.4); } }
+
+.ficha{
+  position: relative; background: var(--ficha); border-radius: var(--r-ficha);
+  padding: 76px clamp(22px, 5vw, 44px) clamp(24px, 5vw, 40px);
+}
+/* la muesca de arriba a la derecha, igual que en las fichas de Instagram */
+.ficha__muesca{
+  position: absolute; top: 0; right: 0;
+  height: 50px; padding: 0 6px 6px 22px;
+  display: flex; align-items: center;
+  background: var(--crema); border-bottom-left-radius: 26px;
+  font: italic 600 .98rem/1 var(--display); color: var(--naranja-texto); white-space: nowrap;
+}
+.ficha__muesca::before, .ficha__muesca::after{
+  content: ""; position: absolute; width: 26px; height: 26px;
+  background: radial-gradient(circle at 0 100%, transparent 25.5px, var(--crema) 26px);
+}
+.ficha__muesca::before{ top: 0; left: -26px; }
+.ficha__muesca::after{ bottom: -26px; right: 0; }
+
+.ficha h1{
+  font: italic 500 clamp(2.3rem, 1.2rem + 4.6vw, 3.9rem)/1.02 var(--display);
+  letter-spacing: -.015em; color: var(--verde); text-wrap: balance;
+}
+.ficha .etiqueta{ margin-top: 12px; }
+.ficha__frase{ margin-top: 16px; max-width: 34em; font-size: 1.1rem; }
+.ficha__lista{ margin-top: 20px; font: italic 500 1.18rem/1.45 var(--display); color: var(--verde); }
+.ficha .variantes{ margin-top: 20px; }
+.ficha__pie{
+  margin-top: 26px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px;
+}
+.ficha__pie .precio{ font-size: clamp(3.1rem, 2rem + 5vw, 4.4rem); }
+.ficha__pie .boton{ flex: 1 1 230px; max-width: 320px; min-height: 56px; font-size: 1.06rem; }
+
+@media (min-width: 860px){
+  .destacado{ padding-top: 18px; }
+  .destacado .producto{ grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 48px; align-items: center; }
+  .destacado .sticker{ --d: 132px; top: -20px; right: -22px; }
+}
+
+/* ---------- 2. Principales ---------- */
+.principales{
+  max-width: var(--ancho); margin: 0 auto;
+  padding: clamp(56px, 9vw, 104px) var(--lado) 0;
+  display: grid; gap: 56px 36px;
+}
+.principales .producto{ display: flex; flex-direction: column; }
+.principales .producto__info{ margin-top: 20px; display: flex; flex-direction: column; flex: 1; }
+.principales .nombre{ font-size: clamp(1.5rem, 1.1rem + 1.6vw, 1.9rem); }
+.principales .etiqueta{ margin-top: 6px; }
+.principales .frase{ margin-top: 8px; }
+.producto__lista{ margin-top: 14px; }
+.producto__lista li + li{ margin-top: 2px; }
+.principales .variantes{ margin-top: 16px; }
+.producto__pie{
+  margin-top: auto; padding-top: 20px;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 20px;
+}
+.principales .precio{ font-size: clamp(2.6rem, 2rem + 2.4vw, 3.3rem); }
+.principales .boton{ flex: 1 1 220px; max-width: 300px; }
+@media (min-width: 720px){
+  .principales{ grid-template-columns: 1fr 1fr; }
+}
+
+/* ---------- 3. Banda ancha (el último principal impar) ---------- */
+.banda{ margin-top: clamp(56px, 9vw, 104px); background: var(--verde); color: var(--crema); }
+.banda .producto{
+  max-width: var(--ancho); margin: 0 auto;
+  padding: clamp(40px, 7vw, 84px) var(--lado);
+  display: grid; gap: 30px;
+}
+.diptico{ display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 18px; }
+.diptico__op{ display: block; cursor: pointer; }
+.diptico__op img{
+  width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 18px;
+  outline: 3px solid transparent; outline-offset: 3px;
+}
+.diptico__op:has(input:checked) img{ outline-color: var(--crema); }
+.diptico__op .chip{ display: flex; justify-content: center; margin-top: 14px; }
+.banda .chip input:checked + span{ background: var(--crema); border-color: var(--crema); color: var(--verde-prof); }
+.banda .nombre{ color: var(--crema); font-size: clamp(2rem, 1.3rem + 3.2vw, 3.1rem); letter-spacing: .07em; }
+.banda .frase{ margin-top: 10px; font-size: 1.35rem; }
+.banda .etiqueta{ margin-top: 10px; color: var(--crema); }
+.banda .producto__lista{ margin-top: 18px; font-size: 1.1rem; }
+.banda .producto__pie{ justify-content: flex-start; gap: 16px 28px; padding-top: 26px; }
+.banda .precio{ color: var(--crema); font-size: clamp(3rem, 2rem + 4vw, 4rem); }
+.banda .boton{ min-height: 56px; }
+@media (min-width: 860px){
+  .banda .producto{ grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 60px; align-items: center; }
+}
+
+/* ---------- 4. Catálogo ---------- */
+.catalogo{
+  max-width: var(--ancho); margin: 0 auto;
+  padding: clamp(56px, 9vw, 104px) var(--lado) 0;
+}
+.titulo{
+  font: italic 500 clamp(2rem, 1.3rem + 3vw, 3rem)/1.05 var(--display);
+  letter-spacing: -.01em; color: var(--verde);
+}
+.catalogo__grilla{
+  margin-top: clamp(24px, 4vw, 40px);
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 16px;
+}
+.catalogo .producto{ display: flex; flex-direction: column; }
+.catalogo .galeria__marco{ border-radius: 16px; }
+.catalogo .mini{ width: 42px; border-radius: 8px; }
+.catalogo .producto__info{ margin-top: 14px; display: flex; flex-direction: column; flex: 1; }
+.catalogo .nombre{ font-size: 1.08rem; }
+.catalogo .frase{ margin-top: 4px; font-size: 1rem; color: var(--naranja-texto); }
+.catalogo .etiqueta{ margin-top: 4px; font-size: .88rem; }
+.catalogo .producto__lista{ margin-top: 8px; font-size: .92rem; line-height: 1.4; }
+.catalogo .variantes{ margin-top: 12px; }
+.catalogo .chip span{ min-height: 36px; padding: 0 .9em; font-size: .88rem; }
+.catalogo .producto__pie{ display: block; padding-top: 14px; }
+.catalogo .precio{ font-size: 2.1rem; }
+.catalogo .boton{ margin-top: 10px; min-height: 46px; padding: .5em 1em; }
+@media (min-width: 720px){
+  .catalogo__grilla{ grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 56px 32px; }
+  .catalogo .nombre{ font-size: 1.3rem; }
+  .catalogo .producto__lista{ font-size: 1rem; }
+  .catalogo .precio{ font-size: 2.5rem; }
+  .catalogo .producto__pie{
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px;
+  }
+  .catalogo .boton{ margin-top: 0; width: auto; padding: .5em 1.3em; }
+}
+
+/* ---------- Cómo pedir ---------- */
+.como{
+  max-width: var(--ancho); margin: 0 auto;
+  padding: clamp(56px, 9vw, 104px) var(--lado) 0;
+}
+.como__pasos{ margin-top: clamp(20px, 3vw, 32px); display: grid; gap: 22px 36px; counter-reset: paso; }
+.como__pasos li{
+  counter-increment: paso; display: grid; grid-template-columns: 2.2rem 1fr; gap: 0 14px; align-items: start;
+  max-width: 30em;
+}
+.como__pasos li::before{
+  content: counter(paso); grid-row: span 2;
+  font: italic 500 3rem/.95 var(--display); color: var(--naranja);
+}
+.como__pasos strong{ font-weight: 700; color: var(--verde); }
+@media (min-width: 720px){ .como__pasos{ grid-template-columns: repeat(3, 1fr); } }
+
+/* ---------- Pie ---------- */
+.pie{
+  max-width: var(--ancho); margin: clamp(56px, 9vw, 104px) auto 0;
+  padding: 28px var(--lado) 36px;
+  border-top: 1.5px solid color-mix(in srgb, var(--verde) 30%, transparent);
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px 32px;
+}
+.pie img{ width: 132px; }
+.pie__enlaces{ display: flex; flex-wrap: wrap; gap: 8px 28px; font-weight: 600; color: var(--verde); }
+.pie__enlaces a{ text-underline-offset: 4px; }
+
+.credito{
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 16px var(--lado);
+  background: var(--verde-prof); color: var(--crema);
+  font-size: .92rem; text-decoration: none;
+}
+.credito img{ width: auto; height: 26px; }
+.credito strong{ font-weight: 700; }
+.credito:hover span{ text-decoration: underline; text-underline-offset: 4px; }
+
+/* ---------- Globo flotante de WhatsApp ---------- */
+.flotante{
+  position: fixed; z-index: 20;
+  right: max(16px, env(safe-area-inset-right, 0px));
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  width: 62px; height: 62px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--verde); color: var(--crema);
+  border: 3px solid var(--crema);
+  box-shadow: 0 6px 18px rgba(42, 70, 61, .38);
+  transition: transform .15s, background-color .15s;
+}
+.flotante svg{ width: 30px; height: 30px; fill: currentColor; }
+.flotante:hover{ background: var(--verde-prof); transform: scale(1.06); }
+@media (min-width: 860px){
+  .flotante{ right: 28px; bottom: 28px; width: 66px; height: 66px; }
+  .flotante svg{ width: 32px; height: 32px; }
+}
+
+.aviso{ max-width: 34em; margin: 40px auto; padding: 0 var(--lado); text-align: center; }
+
+/* tarjetas alineadas: en cada fila, los textos arrancan a la misma altura */
+@supports (grid-template-rows: subgrid){
+  .principales .producto, .catalogo .producto{
+    display: grid; grid-template-rows: subgrid; grid-row: span 2; row-gap: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .sticker{ animation: none; }
+  .boton, .flotante{ transition: none; }
+  .flotante:hover{ transform: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="cabecera">
+  <a class="cabecera__marca" href="#" aria-label="Siempre Mate, inicio"><img src="img/logo.png" alt="Siempre Mate" width="720" height="212"></a>
+  <nav class="cabecera__nav" aria-label="Contacto">
+    <a class="cabecera__ig" data-ig href="https://www.instagram.com/siempremate.ar/" target="_blank" rel="noopener">Instagram</a>
+    <a class="boton boton--linea" data-consulta href="#" target="_blank" rel="noopener">Consultar</a>
+  </nav>
+</header>
+
+<main id="tienda">
+  <noscript><p class="aviso">Para ver los mates necesitás activar JavaScript. También podés escribirnos por Instagram: @siempremate.ar</p></noscript>
+</main>
+
+<section class="como" aria-labelledby="como-t">
+  <h2 class="titulo" id="como-t">Cómo pedir</h2>
+  <ol class="como__pasos">
+    <li><strong>Elegí tu mate</strong><span>Si viene en más de un color, marcá el que te gusta.</span></li>
+    <li><strong>Tocá “Pedir por WhatsApp”</strong><span>Se abre el chat con tu pedido ya escrito. Solo tenés que enviarlo.</span></li>
+    <li><strong>Coordinamos por chat</strong><span>Te confirmamos el pedido y arreglamos el pago y la entrega.</span></li>
+  </ol>
+</section>
+
+<footer>
+  <div class="pie">
+    <img src="img/logo.png" alt="Siempre Mate" width="720" height="212" loading="lazy">
+    <div class="pie__enlaces">
+      <a data-ig href="https://www.instagram.com/siempremate.ar/" target="_blank" rel="noopener">Instagram @siempremate.ar</a>
+      <a data-consulta href="#" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+  <a class="credito" href="https://emanuelpulpeiro.com/" target="_blank" rel="noopener">
+    <img src="img/creo.png" alt="" width="99" height="120" loading="lazy">
+    <span>Powered by <strong>estudiocreo</strong></span>
+  </a>
+</footer>
+
+<a class="flotante" data-consulta data-icono-wa href="#" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp"></a>
+
+<script>
+/* =====================================================================
+   CONFIGURACIÓN: lo único que hay que tocar a mano
+   ===================================================================== */
+const CONFIG = {
+  // Número que recibe los pedidos: 549 + código de área sin 0 + número sin 15.
+  // Solo dígitos. Ejemplo: "5491123456789"
+  whatsapp: "",
+
+  instagram: "https://www.instagram.com/siempremate.ar/",
+
+  // Enlace CSV de la planilla de Google (ver README.md). Vacío = usa la lista de abajo.
+  planilla: "",
+
+  // Texto de la pestaña que acompaña al producto destacado.
+  rotuloDestacado: "Destacado de temporada"
+};
+
+/* =====================================================================
+   PRODUCTOS: lista de respaldo. Si CONFIG.planilla tiene un enlace,
+   la planilla manda y esta lista solo se usa si la planilla no responde.
+   seccion: "destacado" (uno solo, va arriba), "principal" o "catalogo".
+   El orden de la lista es el orden en la página.
+   ===================================================================== */
+const PRODUCTOS = [
+  {
+    "seccion": "destacado",
+    "nombre": "Box especial Día de la Madre",
+    "precio": 39900,
+    "etiqueta": "",
+    "blonda": "Oferta especial",
+    "blonda_estilo": "",
+    "frase": "Mate y bombilla grabados con “Te amo mamá”, en caja de presentación.",
+    "caracteristicas": [
+      "Caja de presentación",
+      "Mate Camionero de algarrobo",
+      "Brilloso laqueado",
+      "Bombilla chata",
+      "Todo grabado “Te amo mamá”"
+    ],
+    "variantes": [],
+    "fotos": [
+      "box-madre-1.jpg",
+      "box-madre-2.jpg",
+      "box-madre-3.jpg"
+    ]
+  },
+  {
+    "seccion": "principal",
+    "nombre": "Combo Mamá",
+    "precio": 15000,
+    "etiqueta": "¡Bombilla de regalo!",
+    "blonda": "Combo Mamá",
+    "blonda_estilo": "izquierda",
+    "frase": "",
+    "caracteristicas": [
+      "Térmico vaso copita, color rosa",
+      "Interior térmico de acero inoxidable",
+      "Bombilla pico de loro de acero inoxidable, filtro pala corta"
+    ],
+    "variantes": [],
+    "fotos": [
+      "combo-mama-1.jpg"
+    ]
+  },
+  {
+    "seccion": "principal",
+    "nombre": "Camionero",
+    "precio": 24900,
+    "etiqueta": "¡Bombilla de regalo!",
+    "blonda": "Oferta especial",
+    "blonda_estilo": "izquierda",
+    "frase": "",
+    "caracteristicas": [
+      "Algarrobo, brilloso laqueado",
+      "Virola de acero",
+      "Bombilla pico de loro de acero inoxidable, filtro pala corta"
+    ],
+    "variantes": [],
+    "fotos": [
+      "camionero-1.jpg",
+      "camionero-3.jpg"
+    ]
+  },
+  {
+    "seccion": "principal",
+    "nombre": "Ranchero",
+    "precio": 30000,
+    "etiqueta": "",
+    "blonda": "",
+    "blonda_estilo": "",
+    "frase": "¡El que no te puede faltar!",
+    "caracteristicas": [
+      "Trabajo artesanal",
+      "Algarrobo",
+      "Moldeado y pintado a mano"
+    ],
+    "variantes": [
+      "Blanco",
+      "Rosa"
+    ],
+    "fotos": [
+      "ranchero-blanco.jpg",
+      "ranchero-rosa.jpg",
+      "ranchero-mano.jpg"
+    ]
+  },
+  {
+    "seccion": "catalogo",
+    "nombre": "Calabaza",
+    "precio": 20000,
+    "etiqueta": "",
+    "blonda": "",
+    "blonda_estilo": "",
+    "frase": "",
+    "caracteristicas": [
+      "Mate de calabaza",
+      "Virola",
+      "Recubierto en PVC"
+    ],
+    "variantes": [],
+    "fotos": [
+      "calabaza.jpg"
+    ]
+  },
+  {
+    "seccion": "catalogo",
+    "nombre": "Malvinas Argentinas",
+    "precio": 24900,
+    "etiqueta": "",
+    "blonda": "Combo especial",
+    "blonda_estilo": "celeste izquierda",
+    "frase": "",
+    "caracteristicas": [
+      "Imperial de goma",
+      "Interior térmico"
+    ],
+    "variantes": [
+      "Blanco",
+      "Negro"
+    ],
+    "fotos": [
+      "malvinas-blanco.jpg",
+      "malvinas-negro.jpg"
+    ]
+  },
+  {
+    "seccion": "catalogo",
+    "nombre": "Imperial",
+    "precio": 30000,
+    "etiqueta": "",
+    "blonda": "",
+    "blonda_estilo": "",
+    "frase": "",
+    "caracteristicas": [
+      "Algarrobo",
+      "Madera laqueada",
+      "Guarda de acero"
+    ],
+    "variantes": [],
+    "fotos": [
+      "imperial-acero.jpg"
+    ]
+  },
+  {
+    "seccion": "catalogo",
+    "nombre": "Imperial Premium",
+    "precio": 35000,
+    "etiqueta": "",
+    "blonda": "",
+    "blonda_estilo": "",
+    "frase": "",
+    "caracteristicas": [
+      "Algarrobo",
+      "Madera laqueada",
+      "Guarda de alpaca"
+    ],
+    "variantes": [],
+    "fotos": [
+      "imperial-alpaca.jpg"
+    ]
+  },
+  {
+    "seccion": "catalogo",
+    "nombre": "Torpedo",
+    "precio": 65000,
+    "etiqueta": "",
+    "blonda": "",
+    "blonda_estilo": "",
+    "frase": "¡La joya de la corona!",
+    "caracteristicas": [
+      "Cuero croco",
+      "Base ancha",
+      "Virola de alpaca cincelada",
+      "Anillo de bronce negro"
+    ],
+    "variantes": [],
+    "fotos": [
+      "torpedo-1.jpg",
+      "torpedo-2.jpg"
+    ]
+  }
+];
+
+/* ===================================================================== */
+
+const ICONO_WA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>';
+
+let LISTA = [];
+const tienda = document.getElementById('tienda');
+
+function esc(s){
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function src(f){ return /^(https?:|data:)/.test(f) ? f : 'img/' + f; }
+function precioTexto(n){ return '$' + Number(n).toLocaleString('es-AR'); }
+function precioHTML(n){
+  return n > 0 ? '<p class="precio"><span class="precio__signo">$</span>' + Number(n).toLocaleString('es-AR') + '</p>' : '';
+}
+function enlaceWA(texto){
+  const n = CONFIG.whatsapp.replace(/\D/g, '');
+  const t = encodeURIComponent(texto);
+  return n ? 'https://wa.me/' + n + '?text=' + t : 'https://api.whatsapp.com/send?text=' + t;
+}
+function mensaje(p, v){
+  let m = '¡Hola! Quiero pedir: ' + p.nombre;
+  if (p.variantes.length) m += ', color ' + p.variantes[v || 0];
+  if (p.precio > 0) m += ' (' + precioTexto(p.precio) + ')';
+  return m + '.';
+}
+
+/* ---------- piezas ---------- */
+function galeria(p, i, urgente){
+  const carga = urgente ? 'fetchpriority="high"' : 'loading="lazy"';
+  let h = '<div class="galeria"><div class="galeria__marco"><img class="galeria__foto" src="' + esc(src(p.fotos[0])) +
+          '" alt="' + esc(p.nombre) + '" width="960" height="1200" ' + carga + '></div>';
+  if (p.fotos.length > 1){
+    h += '<div class="galeria__minis" role="group" aria-label="Fotos de ' + esc(p.nombre) + '">';
+    p.fotos.forEach((f, k) => {
+      h += '<button type="button" class="mini" data-foto="' + k + '" aria-pressed="' + (k === 0) +
+           '" aria-label="Foto ' + (k + 1) + ' de ' + p.fotos.length + '"><img src="' + esc(src(f)) +
+           '" alt="" width="96" height="120" loading="lazy"></button>';
+    });
+    h += '</div>';
+  }
+  return h + blonda(p) + '</div>';
+}
+function variantes(p, i){
+  if (!p.variantes.length) return '';
+  let h = '<fieldset class="variantes"><legend class="solo-lector">Color de ' + esc(p.nombre) + '</legend>';
+  p.variantes.forEach((v, k) => {
+    h += '<label class="chip"><input type="radio" name="v' + i + '" value="' + k + '"' + (k === 0 ? ' checked' : '') +
+         '><span>' + esc(v) + '</span></label>';
+  });
+  return h + '</fieldset>';
+}
+function lista(p, clase, unida){
+  if (!p.caracteristicas.length) return '';
+  if (unida) return '<p class="' + clase + '">' +
+    esc(p.caracteristicas.map((c, k) => k ? c.charAt(0).toLowerCase() + c.slice(1) : c).join(', ')) + '</p>';
+  return '<ul class="' + clase + '">' + p.caracteristicas.map(c => '<li>' + esc(c) + '</li>').join('') + '</ul>';
+}
+function botonPedir(p, extra, corto){
+  const texto = corto ? 'Pedir<span class="solo-lector"> ' + esc(p.nombre) + ' por WhatsApp</span>' : 'Pedir por WhatsApp';
+  return '<a class="boton ' + (extra || '') + '" data-pedir href="' + esc(enlaceWA(mensaje(p, 0))) +
+         '" target="_blank" rel="noopener">' + ICONO_WA + '<span>' + texto + '</span></a>';
+}
+// Blonda: borde festoneado fino, centro claro y texto. Se dibuja por código,
+// así que nunca queda pegada en la foto.
+function blonda(p){
+  if (!p.blonda) return '';
+  const estilo = limpio(p.blonda_estilo);
+  const color = ['celeste', 'verde', 'naranja'].find(c => estilo.includes(c));
+  const clases = 'sticker' + (color ? ' sticker--' + color : '') + (/izq/.test(estilo) ? ' sticker--izq' : '');
+  const N = 36, R = 54;
+  let c = '';
+  for (let k = 0; k < N; k++){
+    const a = k / N * 2 * Math.PI;
+    c += '<circle cx="' + (60 + R * Math.cos(a)).toFixed(1) + '" cy="' + (60 + R * Math.sin(a)).toFixed(1) + '" r="4.7"/>';
+  }
+  return '<div class="' + clases + '"><svg viewBox="0 0 120 120" aria-hidden="true"><g class="sticker__borde">' + c +
+         '<circle cx="60" cy="60" r="' + R + '"/></g><circle class="sticker__centro" cx="60" cy="60" r="49.6"/>' +
+         '<circle class="sticker__hilo" cx="60" cy="60" r="46"/></svg><span>' + esc(p.blonda.replace(/[¡!]/g, '')) + '</span></div>';
+}
+
+/* ---------- secciones ---------- */
+function htmlDestacado(p, i){
+  return '<section class="destacado"><article class="producto" data-i="' + i + '">' +
+    '<div class="destacado__foto">' + galeria(p, i, true) + '</div>' +
+    '<div class="ficha">' +
+      (CONFIG.rotuloDestacado ? '<span class="ficha__muesca">' + esc(CONFIG.rotuloDestacado) + '</span>' : '') +
+      '<h1>' + esc(p.nombre) + '</h1>' +
+      (p.etiqueta ? '<p class="etiqueta">' + esc(p.etiqueta) + '</p>' : '') +
+      (p.frase ? '<p class="ficha__frase">' + esc(p.frase) + '</p>' : '') +
+      lista(p, 'ficha__lista') + variantes(p, i) +
+      '<div class="ficha__pie">' + precioHTML(p.precio) + botonPedir(p) + '</div>' +
+    '</div></article></section>';
+}
+function htmlPrincipal(p, i){
+  return '<article class="producto" data-i="' + i + '">' + galeria(p, i) +
+    '<div class="producto__info"><h2 class="nombre">' + esc(p.nombre) + '</h2>' +
+      (p.etiqueta ? '<p class="etiqueta">' + esc(p.etiqueta) + '</p>' : '') +
+      (p.frase ? '<p class="frase">' + esc(p.frase) + '</p>' : '') +
+      lista(p, 'producto__lista') + variantes(p, i) +
+      '<div class="producto__pie">' + precioHTML(p.precio) + botonPedir(p) + '</div>' +
+    '</div></article>';
+}
+function htmlBanda(p, i){
+  let fotos;
+  if (p.variantes.length > 1){
+    fotos = '<fieldset class="diptico"><legend class="solo-lector">Color de ' + esc(p.nombre) + '</legend>' +
+      p.variantes.map((v, k) =>
+        '<label class="diptico__op"><img src="' + esc(src(p.fotos[k] || p.fotos[0])) + '" alt="' + esc(p.nombre + ' ' + v) +
+        '" width="960" height="1200" loading="lazy"><span class="chip"><input type="radio" name="v' + i + '" value="' + k + '"' +
+        (k === 0 ? ' checked' : '') + '><span>' + esc(v) + '</span></span></label>').join('') + blonda(p) + '</fieldset>';
+  } else {
+    fotos = galeria(p, i);
+  }
+  return '<section class="banda"><article class="producto" data-i="' + i + '">' + fotos +
+    '<div class="producto__info"><h2 class="nombre">' + esc(p.nombre) + '</h2>' +
+      (p.frase ? '<p class="frase">' + esc(p.frase) + '</p>' : '') +
+      (p.etiqueta ? '<p class="etiqueta">' + esc(p.etiqueta) + '</p>' : '') +
+      lista(p, 'producto__lista') +
+      '<div class="producto__pie">' + precioHTML(p.precio) + botonPedir(p, 'boton--claro') + '</div>' +
+    '</div></article></section>';
+}
+function htmlCatalogo(p, i){
+  return '<article class="producto" data-i="' + i + '">' + galeria(p, i) +
+    '<div class="producto__info"><h3 class="nombre">' + esc(p.nombre) + '</h3>' +
+      (p.frase ? '<p class="frase">' + esc(p.frase) + '</p>' : '') +
+      (p.etiqueta ? '<p class="etiqueta">' + esc(p.etiqueta) + '</p>' : '') +
+      lista(p, 'producto__lista', true) + variantes(p, i) +
+      '<div class="producto__pie">' + precioHTML(p.precio) + botonPedir(p, 'boton--ancho', true) + '</div>' +
+    '</div></article>';
+}
+
+function pintar(productos){
+  LISTA = productos.filter(p => p && p.nombre && p.fotos && p.fotos.length);
+  if (!LISTA.length){
+    tienda.innerHTML = '<p class="aviso">Estamos actualizando el catálogo. Escribinos por WhatsApp y te contamos qué hay disponible.</p>';
+    return;
+  }
+  const idx = p => LISTA.indexOf(p);
+  const dest = LISTA.find(p => p.seccion === 'destacado') || LISTA[0];
+  const resto = LISTA.filter(p => p !== dest);
+  const princ = resto.filter(p => p.seccion !== 'catalogo');
+  const cat = resto.filter(p => p.seccion === 'catalogo');
+  // si los principales son impares, el último va en una banda de ancho completo
+  const banda = princ.length % 2 === 1 ? princ.pop() : null;
+
+  let h = htmlDestacado(dest, idx(dest));
+  if (princ.length) h += '<section class="principales" aria-label="Elegidos">' + princ.map(p => htmlPrincipal(p, idx(p))).join('') + '</section>';
+  if (banda) h += htmlBanda(banda, idx(banda));
+  if (cat.length) h += '<section class="catalogo" aria-labelledby="cat-t"><h2 class="titulo" id="cat-t">Más modelos</h2>' +
+                       '<div class="catalogo__grilla">' + cat.map(p => htmlCatalogo(p, idx(p))).join('') + '</div></section>';
+  tienda.innerHTML = h;
+}
+
+/* ---------- interacción: fotos y colores ---------- */
+function mostrarFoto(art, k){
+  const p = LISTA[art.dataset.i];
+  const foto = art.querySelector('.galeria__foto');
+  if (foto && p.fotos[k]) foto.src = src(p.fotos[k]);
+  art.querySelectorAll('.mini').forEach(m => m.setAttribute('aria-pressed', m.dataset.foto == k));
+}
+function elegirVariante(art, k){
+  const p = LISTA[art.dataset.i];
+  const radio = art.querySelector('input[type="radio"][value="' + k + '"]');
+  if (radio) radio.checked = true;
+  const a = art.querySelector('[data-pedir]');
+  if (a) a.href = enlaceWA(mensaje(p, k));
+}
+tienda.addEventListener('click', e => {
+  const mini = e.target.closest('.mini');
+  if (!mini) return;
+  const art = mini.closest('.producto');
+  const k = Number(mini.dataset.foto);
+  mostrarFoto(art, k);
+  if (k < LISTA[art.dataset.i].variantes.length) elegirVariante(art, k);
+});
+tienda.addEventListener('change', e => {
+  if (!e.target.matches('input[type="radio"]')) return;
+  const art = e.target.closest('.producto');
+  const k = Number(e.target.value);
+  elegirVariante(art, k);
+  mostrarFoto(art, k);
+});
+
+/* ---------- planilla de Google (opcional) ---------- */
+function leerCSV(t){
+  const filas = []; let fila = [], campo = '', comillas = false;
+  for (let i = 0; i < t.length; i++){
+    const c = t[i];
+    if (comillas){
+      if (c === '"'){ if (t[i + 1] === '"'){ campo += '"'; i++; } else comillas = false; }
+      else campo += c;
+    }
+    else if (c === '"') comillas = true;
+    else if (c === ','){ fila.push(campo); campo = ''; }
+    else if (c === '\n'){ fila.push(campo); filas.push(fila); fila = []; campo = ''; }
+    else if (c !== '\r') campo += c;
+  }
+  if (campo !== '' || fila.length){ fila.push(campo); filas.push(fila); }
+  return filas;
+}
+function limpio(s){ return String(s || '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+function cabecera(s){ return limpio(s).replace(/[\s-]+/g, '_'); }
+function partes(s){ return String(s || '').split(/\s*[|\n]\s*/).map(x => x.trim()).filter(Boolean); }
+function filasAProductos(filas){
+  if (filas.length < 2) return [];
+  const cab = filas[0].map(cabecera);
+  const col = n => cab.indexOf(n);
+  const out = [];
+  filas.slice(1).forEach(f => {
+    const v = n => (col(n) >= 0 ? (f[col(n)] || '').trim() : '');
+    if (!v('nombre')) return;
+    if (/^(no|n|0|false|pausado)$/.test(limpio(v('activo')))) return;
+    const sec = limpio(v('seccion'));
+    out.push({
+      seccion: sec === 'destacado' || sec === 'principal' ? sec : 'catalogo',
+      nombre: v('nombre'),
+      precio: Number(v('precio').replace(/[.,]\d{1,2}$/, '').replace(/\D/g, '')) || 0,
+      etiqueta: v('etiqueta'),
+      blonda: v('blonda'),
+      blonda_estilo: v('blonda_estilo'),
+      frase: v('frase'),
+      caracteristicas: partes(v('caracteristicas')),
+      variantes: partes(v('variantes')),
+      fotos: partes(v('fotos'))
+    });
+  });
+  return out;
+}
+async function cargarPlanilla(){
+  try{
+    const r = await fetch(CONFIG.planilla, { cache: 'no-store' });
+    if (!r.ok) throw new Error(r.status);
+    const productos = filasAProductos(leerCSV(await r.text()));
+    if (!productos.length) return;
+    const nuevo = JSON.stringify(productos);
+    if (nuevo !== JSON.stringify(LISTA)) pintar(productos);
+    try{ localStorage.setItem('sm-productos', nuevo); }catch(e){}
+  }catch(e){ /* si la planilla no responde queda lo que ya está en pantalla */ }
+}
+
+/* ---------- arranque ---------- */
+document.querySelectorAll('[data-consulta]').forEach(a => a.href = enlaceWA('¡Hola! Quiero hacer una consulta.'));
+document.querySelectorAll('[data-ig]').forEach(a => a.href = CONFIG.instagram);
+document.querySelectorAll('[data-icono-wa]').forEach(a => a.innerHTML = ICONO_WA);
+
+let inicial = PRODUCTOS;
+if (CONFIG.planilla){
+  try{
+    const guardado = JSON.parse(localStorage.getItem('sm-productos') || 'null');
+    if (Array.isArray(guardado) && guardado.length) inicial = guardado;
+  }catch(e){}
+}
+pintar(inicial);
+if (CONFIG.planilla) cargarPlanilla();
+</script>
+</body>
+</html>
