@@ -29,7 +29,7 @@ Cada producto tiene estos datos:
 | Columna | Qué va |
 |---|---|
 | `activo` | `si` o `no`. Con `no` el producto se oculta sin borrarlo. |
-| `seccion` | `destacado` (uno solo, va arriba de todo), `principal` (tarjetas grandes) o `catalogo` (grilla "Más modelos"). |
+| `seccion` | `oportunidad` (tarjeta naranja compacta arriba de todo, para ofertas de último momento), `destacado` (uno solo), `principal` (tarjetas grandes), `banda` (franja verde de ancho completo; si hay dos seguidas, la segunda va en verde más oscuro y con las fotos del otro lado), `premium` (vitrina oscura de ancho completo, con filete dorado) o `catalogo` (grilla "Más modelos"). |
 | `nombre` | Nombre del producto. |
 | `precio` | Solo el número, sin puntos ni signo: `39900`. |
 | `etiqueta` | Texto corto en naranja, por ejemplo `¡Bombilla de regalo!`. |
@@ -39,8 +39,15 @@ Cada producto tiene estos datos:
 | `caracteristicas` | Separadas por una barra vertical: `Algarrobo \| Virola de acero`. |
 | `variantes` | Colores, separados por barra vertical: `Blanco \| Rosa`. La primera variante usa la primera foto, la segunda la segunda, y así. |
 | `fotos` | Nombres de archivo dentro de `img/`, separados por barra vertical. La primera es la principal. |
+| `agotado` | `si` o `no`. Con `si` el producto pasa a la sección "Agotados" al final, con la foto apagada y sin botón de pedido. |
 
 El orden de las filas es el orden en la página. Si la cantidad de productos `principal` es impar, el último se muestra en la banda verde de ancho completo.
+
+**Oportunidad de último momento:** un producto con `oportunidad` en `seccion` aparece en una tarjeta naranja compacta arriba de todo, antes del destacado (usa solo la primera foto). Ahí la `etiqueta` se resalta en una pastilla y el texto de `blonda` va debajo, sin medallón sobre la foto. Cuando termine la oferta, poné `no` en `activo` (o borrá ese producto de la lista) y la banda desaparece. Para compartirla, usá el enlace de la tienda; si querés que lleve directo a la oferta, agregale el ancla, por ejemplo `tiendasiempremate.com.ar/#especial-mama`.
+
+**Línea premium:** cualquier producto con `premium` en `seccion` se muestra en la vitrina oscura, debajo de la banda verde. Con dos fotos se ven las dos a la vez; con una, o con tres o más, usa la galería normal.
+
+**Compartir:** cada producto tiene un botón que comparte su enlace, por ejemplo `tiendasiempremate.com.ar/p/torpedo/`. Ese enlace es una página chica (carpeta `p/`) con la foto del producto como miniatura para WhatsApp, que lleva a la tienda justo en ese producto. El nombre de la carpeta sale del nombre del producto. Si agregás un producto nuevo o le cambiás el nombre o la foto principal, hay que crear o actualizar su página en `p/`; mientras tanto el enlace igual funciona (lo resuelve `404.html`), pero se comparte sin la foto. Para ocultar el botón, poné `compartir: false` en el bloque `CONFIG` de `index.html`.
 
 **Para cambiar el destacado de temporada:** poné `destacado` en el producto nuevo y pasá el anterior a `principal`, `catalogo` o `activo: no`.
 
