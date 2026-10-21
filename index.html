@@ -347,6 +347,39 @@ a{ color: inherit; }
   .banda--alt .producto > :first-child{ order: 2; }
 }
 
+/* ---------- Pastilla de urgencia ("¡Últimas unidades!") ---------- */
+.pastilla{
+  display: inline-block; align-self: flex-start; margin-top: 10px;
+  padding: .45em .95em .4em; border-radius: 999px;
+  background: var(--naranja-texto); color: var(--crema);
+  font: italic 700 .88rem/1.2 var(--display); letter-spacing: .06em; text-transform: uppercase;
+}
+.ficha .pastilla{ margin-top: 14px; }
+.banda .pastilla, .premium .pastilla, .oportunidad .pastilla{ background: var(--crema); color: var(--naranja-texto); }
+.catalogo .pastilla{ font-size: .76rem; letter-spacing: .04em; }
+
+/* ---------- Éxito: un agotado que se muestra como logro ---------- */
+.exito{ margin-top: clamp(56px, 9vw, 104px); background: var(--ficha); }
+.exito .producto{
+  max-width: var(--ancho); margin: 0 auto;
+  padding: clamp(36px, 6vw, 72px) var(--lado);
+  display: grid; gap: 28px;
+}
+.exito__fotos{ position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.exito__fotos img{ width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 16px; }
+.exito .sticker{ --d: 84px; }
+.exito .nombre{ font-size: clamp(1.9rem, 1.2rem + 3vw, 3rem); letter-spacing: .06em; }
+.exito__mensaje{
+  margin-top: 12px; max-width: 24em;
+  font: italic 500 clamp(1.25rem, 1rem + 1vw, 1.6rem)/1.3 var(--display); color: var(--naranja-texto);
+}
+.exito .producto__lista{ margin-top: 14px; font-size: 1rem; }
+@media (min-width: 720px){ .exito .sticker{ --d: 118px; } }
+@media (min-width: 860px){
+  .exito .producto{ grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 56px; align-items: center; }
+}
+.exito + .agotados{ padding-top: clamp(48px, 7vw, 80px); }
+
 /* ---------- Agotados: chicos y apagados, al final ---------- */
 .agotados .galeria{ position: relative; }
 .agotados .galeria__foto{ filter: grayscale(.85); opacity: .6; }
@@ -609,6 +642,8 @@ const CONFIG = {
    último momento), "destacado" (uno solo), "principal" (tarjetas grandes),
    "banda" (franja verde de ancho completo), "premium" (vitrina oscura)
    o "catalogo". agotado: true lo pasa a la sección "Agotados", sin botón de pedido.
+   seccion "exito" + agotado: franja grande a color para mostrar un producto que se agotó.
+   aviso: pastilla naranja de urgencia, por ejemplo "¡Últimas unidades!".
    El orden de la lista es el orden en la página.
    ===================================================================== */
 const PRODUCTOS = [
@@ -617,6 +652,7 @@ const PRODUCTOS = [
     "nombre": "Camionero",
     "precio": 24900,
     "etiqueta": "¡Bombilla de regalo!",
+    "aviso": "¡Últimas unidades!",
     "blonda": "Oferta especial",
     "blonda_estilo": "izquierda",
     "frase": "",
@@ -637,6 +673,7 @@ const PRODUCTOS = [
     "nombre": "Imperial",
     "precio": 30000,
     "etiqueta": "",
+    "aviso": "",
     "blonda": "",
     "blonda_estilo": "",
     "frase": "",
@@ -656,6 +693,7 @@ const PRODUCTOS = [
     "nombre": "Imperial Premium",
     "precio": 35000,
     "etiqueta": "",
+    "aviso": "¡Últimas unidades!",
     "blonda": "",
     "blonda_estilo": "",
     "frase": "",
@@ -675,6 +713,7 @@ const PRODUCTOS = [
     "nombre": "Ranchero",
     "precio": 30000,
     "etiqueta": "",
+    "aviso": "",
     "blonda": "",
     "blonda_estilo": "",
     "frase": "¡El que no te puede faltar!",
@@ -699,6 +738,7 @@ const PRODUCTOS = [
     "nombre": "Malvinas Argentinas",
     "precio": 24900,
     "etiqueta": "",
+    "aviso": "",
     "blonda": "Combo especial",
     "blonda_estilo": "celeste izquierda",
     "frase": "",
@@ -721,6 +761,7 @@ const PRODUCTOS = [
     "nombre": "Torpedo",
     "precio": 65000,
     "etiqueta": "",
+    "aviso": "",
     "blonda": "",
     "blonda_estilo": "",
     "frase": "¡La joya de la corona!",
@@ -742,6 +783,7 @@ const PRODUCTOS = [
     "nombre": "Calabaza",
     "precio": 20000,
     "etiqueta": "",
+    "aviso": "",
     "blonda": "",
     "blonda_estilo": "",
     "frase": "",
@@ -761,6 +803,7 @@ const PRODUCTOS = [
     "nombre": "Combo Mamá",
     "precio": 15000,
     "etiqueta": "¡Bombilla de regalo!",
+    "aviso": "",
     "blonda": "Combo Mamá",
     "blonda_estilo": "izquierda",
     "frase": "",
@@ -776,11 +819,12 @@ const PRODUCTOS = [
     "agotado": false
   },
   {
-    "seccion": "catalogo",
+    "seccion": "exito",
     "nombre": "Box especial Día de la Madre",
     "precio": 39900,
-    "etiqueta": "",
-    "blonda": "Oferta especial",
+    "etiqueta": "Se agotó en el Día de la Madre. ¡Gracias por elegirnos!",
+    "aviso": "",
+    "blonda": "¡Agotado!",
     "blonda_estilo": "",
     "frase": "Mate y bombilla grabados con “Te amo mamá”, en caja de presentación.",
     "caracteristicas": [
@@ -803,6 +847,7 @@ const PRODUCTOS = [
     "nombre": "Especial Mamá",
     "precio": 29900,
     "etiqueta": "¡Últimas unidades!",
+    "aviso": "",
     "blonda": "Oportunidad única",
     "blonda_estilo": "",
     "frase": "Virola y bombilla grabadas: “Te amo Mamá” y “Que tus mates sean eternos”.",
@@ -922,7 +967,7 @@ function htmlDestacado(p, i){
     '<div class="ficha">' +
       (CONFIG.rotuloDestacado ? '<span class="ficha__muesca">' + esc(CONFIG.rotuloDestacado) + '</span>' : '') +
       '<h1>' + esc(p.nombre) + '</h1>' +
-      (p.etiqueta ? '<p class="etiqueta">' + esc(p.etiqueta) + '</p>' : '') +
+      (p.etiqueta ? '<p class="etiqueta">' + esc(p.etiqueta) + '</p>' : '') + pastilla(p) +
       (p.frase ? '<p class="ficha__frase">' + esc(p.frase) + '</p>' : '') +
       lista(p, 'ficha__lista') + variantes(p, i) +
       '<div class="ficha__pie">' + precioHTML(p.precio) + acciones(p) + '</div>' +
@@ -931,7 +976,7 @@ function htmlDestacado(p, i){
 function htmlPrincipal(p, i){
   return '<article class="producto" data-i="' + i + '">' + galeria(p, i) +
     '<div class="producto__info"><h2 class="nombre">' + esc(p.nombre) + '</h2>' +
-      (p.etiqueta ? '<p class="etiqueta">' + esc(p.etiqueta) + '</p>' : '') +
+      (p.etiqueta ? '<p class="etiqueta">' + esc(p.etiqueta) + '</p>' : '') + pastilla(p) +
       (p.frase ? '<p class="frase">' + esc(p.frase) + '</p>' : '') +
       lista(p, 'producto__lista') + variantes(p, i) +
       '<div class="producto__pie">' + precioHTML(p.precio) + acciones(p) + '</div>' +
@@ -951,7 +996,7 @@ function htmlBanda(p, i, alt){
   return '<section class="banda' + (alt ? ' banda--alt' : '') + '"><article class="producto" data-i="' + i + '">' + fotos +
     '<div class="producto__info"><h2 class="nombre">' + esc(p.nombre) + '</h2>' +
       (p.frase ? '<p class="frase">' + esc(p.frase) + '</p>' : '') +
-      (p.etiqueta ? '<p class="etiqueta">' + esc(p.etiqueta) + '</p>' : '') +
+      (p.etiqueta ? '<p class="etiqueta">' + esc(p.etiqueta) + '</p>' : '') + pastilla(p) +
       lista(p, 'producto__lista') +
       '<div class="producto__pie">' + precioHTML(p.precio) + acciones(p, 'boton--claro') + '</div>' +
     '</div></article></section>';
@@ -968,7 +1013,7 @@ function htmlPremium(p, i){
     '<div class="producto__info">' +
       (p.frase ? '<p class="frase">' + esc(p.frase) + '</p>' : '') +
       '<h2 class="nombre">' + esc(p.nombre) + '</h2>' +
-      (p.etiqueta ? '<p class="etiqueta">' + esc(p.etiqueta) + '</p>' : '') +
+      (p.etiqueta ? '<p class="etiqueta">' + esc(p.etiqueta) + '</p>' : '') + pastilla(p) +
       lista(p, 'producto__lista') + variantes(p, i) +
       '<div class="producto__pie">' + precioHTML(p.precio) + acciones(p, 'boton--claro') + '</div>' +
     '</div></article>';
@@ -979,7 +1024,7 @@ function htmlOportunidad(p, i){
     '<div class="oportunidad__foto"><img src="' + esc(src(p.fotos[0])) + '" alt="' + esc(p.nombre) +
       '" width="960" height="1200" fetchpriority="high"></div>' +
     '<div class="oportunidad__titulo"><h2 class="nombre">' + esc(p.nombre) + '</h2>' +
-      (p.etiqueta ? '<p class="etiqueta">' + esc(p.etiqueta) + '</p>' : '') +
+      (p.etiqueta ? '<p class="etiqueta">' + esc(p.etiqueta) + '</p>' : '') + pastilla(p) +
       (p.blonda ? '<p class="oportunidad__bajada">' + esc(p.blonda) + '</p>' : '') + '</div>' +
     '<div class="oportunidad__detalle">' +
       (p.frase ? '<p class="frase">' + esc(p.frase) + '</p>' : '') +
@@ -993,11 +1038,20 @@ function htmlAgotado(p, i){
     '</div><span class="agotado">Agotado</span></div>' +
     '<div class="producto__info"><h3 class="nombre">' + esc(p.nombre) + '</h3>' + lista(p, 'producto__lista', true) + '</div></article>';
 }
+function pastilla(p){ return p.aviso ? '<p class="pastilla">' + esc(p.aviso) + '</p>' : ''; }
+function htmlExito(p, i){
+  return '<section class="exito"><article class="producto" data-i="' + i + '"><div class="exito__fotos">' +
+    p.fotos.slice(0, 3).map((f, k) => '<img src="' + esc(src(f)) + '" alt="' + (k ? '' : esc(p.nombre)) +
+      '" width="960" height="1200" loading="lazy">').join('') + blonda(p) + '</div>' +
+    '<div class="producto__info"><h2 class="nombre">' + esc(p.nombre) + '</h2>' +
+      (p.etiqueta ? '<p class="exito__mensaje">' + esc(p.etiqueta) + '</p>' : '') +
+      lista(p, 'producto__lista', true) + '</div></article></section>';
+}
 function htmlCatalogo(p, i){
   return '<article class="producto" data-i="' + i + '">' + galeria(p, i) +
     '<div class="producto__info"><h3 class="nombre">' + esc(p.nombre) + '</h3>' +
       (p.frase ? '<p class="frase">' + esc(p.frase) + '</p>' : '') +
-      (p.etiqueta ? '<p class="etiqueta">' + esc(p.etiqueta) + '</p>' : '') +
+      (p.etiqueta ? '<p class="etiqueta">' + esc(p.etiqueta) + '</p>' : '') + pastilla(p) +
       lista(p, 'producto__lista', true) + variantes(p, i) +
       '<div class="producto__pie">' + precioHTML(p.precio) + acciones(p, 'boton--ancho', true) + '</div>' +
     '</div></article>';
@@ -1010,8 +1064,9 @@ function pintar(productos){
     return;
   }
   const idx = p => LISTA.indexOf(p);
-  const agot = LISTA.filter(p => p.agotado);
-  const disp = LISTA.filter(p => !p.agotado);
+  const exitos = LISTA.filter(p => p.seccion === 'exito');
+  const agot = LISTA.filter(p => p.agotado && p.seccion !== 'exito');
+  const disp = LISTA.filter(p => !p.agotado && p.seccion !== 'exito');
   const opor = disp.filter(p => p.seccion === 'oportunidad');
   const sinOpor = disp.filter(p => p.seccion !== 'oportunidad');
   const dest = sinOpor.find(p => p.seccion === 'destacado') || sinOpor[0];
@@ -1033,6 +1088,7 @@ function pintar(productos){
   if (cat.length) h += '<section class="catalogo" aria-labelledby="cat-t"><h2 class="titulo" id="cat-t">Más modelos</h2>' +
                        '<div class="catalogo__grilla' + (de4 ? ' catalogo__grilla--4' : '') + '">' +
                        cat.map(p => htmlCatalogo(p, idx(p))).join('') + '</div></section>';
+  h += exitos.map(p => htmlExito(p, idx(p))).join('');
   if (agot.length) h += '<section class="catalogo agotados" aria-labelledby="ago-t"><h2 class="titulo" id="ago-t">Agotados</h2>' +
                         '<div class="catalogo__grilla">' + agot.map(p => htmlAgotado(p, idx(p))).join('') + '</div></section>';
   tienda.innerHTML = h;
@@ -1147,10 +1203,11 @@ function filasAProductos(filas){
     if (/^(no|n|0|false|pausado)$/.test(limpio(v('activo')))) return;
     const sec = limpio(v('seccion'));
     out.push({
-      seccion: ['oportunidad', 'destacado', 'principal', 'banda', 'premium'].includes(sec) ? sec : 'catalogo',
+      seccion: ['oportunidad', 'destacado', 'principal', 'banda', 'premium', 'exito'].includes(sec) ? sec : 'catalogo',
       nombre: v('nombre'),
       precio: Number(v('precio').replace(/[.,]\d{1,2}$/, '').replace(/\D/g, '')) || 0,
       etiqueta: v('etiqueta'),
+      aviso: v('aviso'),
       blonda: v('blonda'),
       blonda_estilo: v('blonda_estilo'),
       frase: v('frase'),
