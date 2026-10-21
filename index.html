@@ -367,22 +367,32 @@ a{ color: inherit; }
 .catalogo .pastilla{ font-size: .76rem; letter-spacing: .04em; }
 
 /* ---------- Éxito: un agotado que se muestra como logro ---------- */
-/* ---------- Grabados personalizados: fotos de a pares ---------- */
-.grabados{ max-width: var(--ancho); margin: 0 auto; padding: clamp(56px, 9vw, 104px) var(--lado) 0; scroll-margin-top: 16px; }
-.grabados__texto{ margin-top: 10px; max-width: 32em; font: italic 500 1.2rem/1.35 var(--display); color: var(--naranja-texto); }
-.grabados__grilla{ margin-top: clamp(22px, 4vw, 36px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-.grabados__grilla img{ width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 16px; }
-.grabados__cta{
-  aspect-ratio: 4 / 5; border-radius: 16px; padding: 18px;
-  display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 14px;
-  background: var(--verde); color: var(--crema);
+/* ---------- Grabados personalizados: galería deslizable ---------- */
+.grabados{
+  max-width: var(--ancho); margin: 0 auto; padding: clamp(56px, 9vw, 104px) var(--lado) 0;
+  display: grid; gap: 22px; scroll-margin-top: 16px;
 }
-.grabados__cta p{ font: italic 500 clamp(1.3rem, 1rem + 1.6vw, 2rem)/1.15 var(--display); }
-.grabados__cta .boton{ min-height: 46px; max-width: 100%; padding: .55em 1.1em; }
-@media (max-width: 379px){ .grabados__cta{ padding: 14px; } .grabados__cta .boton{ padding-inline: .8em; } .grabados__cta .boton svg{ display: none; } }
-@media (min-width: 720px){
-  .grabados__grilla{ grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
-  .grabados__cta{ padding: 26px; }
+.grabados__texto{ margin-top: 10px; max-width: 26em; font: italic 500 1.2rem/1.35 var(--display); color: var(--naranja-texto); }
+.grabados__intro .boton{ margin-top: 18px; }
+.grabados__pista{
+  display: grid; grid-auto-flow: column; grid-auto-columns: 78%; gap: 12px;
+  overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+  scrollbar-width: none; border-radius: 16px;
+}
+.grabados__pista::-webkit-scrollbar{ display: none; }
+.grabados__pista img{ width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 16px; scroll-snap-align: start; }
+.grabados__flechas{ display: flex; justify-content: flex-end; gap: 10px; margin-top: 12px; }
+.flecha{
+  width: 46px; height: 46px; padding: 0; display: inline-grid; place-items: center;
+  border: 2px solid var(--verde); border-radius: 50%; background: transparent; color: var(--verde); cursor: pointer;
+  transition: background-color .15s, color .15s, opacity .15s;
+}
+.flecha svg{ width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.flecha:hover:not(:disabled){ background: var(--verde); color: var(--crema); }
+.flecha:disabled{ opacity: .3; cursor: default; }
+@media (min-width: 860px){
+  .grabados{ grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 48px; align-items: center; }
+  .grabados__pista{ grid-auto-columns: calc(50% - 6px); }
 }
 
 .exito{ margin-top: clamp(56px, 9vw, 104px); background: var(--ficha); }
@@ -595,7 +605,7 @@ a{ color: inherit; }
 
 @media (prefers-reduced-motion: reduce){
   .sticker, .sticker.sticker--mover, .destacado .sticker.sticker--mover{ animation: none; }
-  .boton, .flotante, .compartir, .copiado{ transition: none; }
+  .boton, .flotante, .compartir, .copiado, .flecha{ transition: none; }
   .flotante:hover{ transform: none; }
 }
 </style>
@@ -1083,18 +1093,28 @@ function htmlExito(p, i){
       (p.etiqueta ? '<p class="exito__mensaje">' + esc(p.etiqueta) + '</p>' : '') +
       lista(p, 'producto__lista', true) + '</div></article></section>';
 }
+const FLECHA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>';
 function htmlGrabados(){
   const g = CONFIG.grabados;
   if (!g || !g.fotos || !g.fotos.length) return '';
-  // fotos de a pares; el lugar que sobra (o uno más al final) es la tarjeta de consulta
-  return '<section class="grabados" id="grabados" aria-labelledby="grab-t"><h2 class="titulo" id="grab-t">' + esc(g.titulo) + '</h2>' +
-    (g.texto ? '<p class="grabados__texto">' + esc(g.texto) + '</p>' : '') +
-    '<div class="grabados__grilla">' +
-      g.fotos.map((f, k) => '<img src="' + esc(src(f)) + '" alt="' + (k ? '' : 'Ejemplo de grabado personalizado') +
-        '" width="960" height="1200" loading="lazy">').join('') +
-      '<div class="grabados__cta"><p>¿Querés el tuyo?</p><a class="boton boton--claro" href="' + esc(enlaceWA(g.mensaje)) +
-        '" target="_blank" rel="noopener">' + ICONO_WA + '<span>Consultar</span></a></div>' +
+  return '<section class="grabados" id="grabados" aria-labelledby="grab-t">' +
+    '<div class="grabados__intro"><h2 class="titulo" id="grab-t">' + esc(g.titulo) + '</h2>' +
+      (g.texto ? '<p class="grabados__texto">' + esc(g.texto) + '</p>' : '') +
+      '<a class="boton" href="' + esc(enlaceWA(g.mensaje)) + '" target="_blank" rel="noopener">' + ICONO_WA + '<span>Consultar</span></a></div>' +
+    '<div class="grabados__galeria"><div class="grabados__pista" tabindex="0" role="region" aria-label="Fotos de grabados (deslizá para ver más)">' +
+      g.fotos.map((f, k) => '<img src="' + esc(src(f)) + '" alt="Grabado personalizado, ejemplo ' + (k + 1) +
+        '" width="960" height="1200" loading="lazy">').join('') + '</div>' +
+      '<div class="grabados__flechas"><button type="button" class="flecha" data-dir="-1" aria-label="Foto anterior" style="transform: scaleX(-1)">' +
+        FLECHA + '</button><button type="button" class="flecha" data-dir="1" aria-label="Foto siguiente">' + FLECHA + '</button></div>' +
     '</div></section>';
+}
+// flechas de la galería: se apagan en los extremos
+function estadoFlechas(){
+  const pista = tienda.querySelector('.grabados__pista');
+  if (!pista) return;
+  const fin = pista.scrollWidth - pista.clientWidth - 2;
+  tienda.querySelector('.flecha[data-dir="-1"]').disabled = pista.scrollLeft <= 2;
+  tienda.querySelector('.flecha[data-dir="1"]').disabled = pista.scrollLeft >= fin;
 }
 function htmlCatalogo(p, i){
   return '<article class="producto" data-i="' + i + '">' + galeria(p, i) +
@@ -1130,6 +1150,7 @@ function pintar(productos){
   let h = opor.map(p => htmlOportunidad(p, idx(p))).join('');
   if (dest) h += htmlDestacado(dest, idx(dest));
   if (princ.length) h += '<section class="principales" aria-label="Elegidos">' + princ.map(p => htmlPrincipal(p, idx(p))).join('') + '</section>';
+  h += htmlGrabados();
   h += bandas.map((p, k) => htmlBanda(p, idx(p), k % 2 === 1)).join('');
   if (prem.length) h += '<section class="premium" aria-label="Línea premium">' + prem.map(p => htmlPremium(p, idx(p))).join('') + '</section>';
   // con 4, 8... modelos la grilla va de a cuatro para que no quede uno suelto
@@ -1137,7 +1158,6 @@ function pintar(productos){
   if (cat.length) h += '<section class="catalogo" aria-labelledby="cat-t"><h2 class="titulo" id="cat-t">Más modelos</h2>' +
                        '<div class="catalogo__grilla' + (de4 ? ' catalogo__grilla--4' : '') + '">' +
                        cat.map(p => htmlCatalogo(p, idx(p))).join('') + '</div></section>';
-  h += htmlGrabados();
   h += exitos.map(p => htmlExito(p, idx(p))).join('');
   if (agot.length) h += '<section class="catalogo agotados" aria-labelledby="ago-t"><h2 class="titulo" id="ago-t">Agotados</h2>' +
                         '<div class="catalogo__grilla">' + agot.map(p => htmlAgotado(p, idx(p))).join('') + '</div></section>';
@@ -1151,6 +1171,8 @@ function pintar(productos){
     return usados[s] > 1 ? s + '-' + usados[s] : s;
   });
   tienda.querySelectorAll('.producto').forEach(a => { a.id = IDS[a.dataset.i]; });
+  const pista = tienda.querySelector('.grabados__pista');
+  if (pista){ pista.addEventListener('scroll', estadoFlechas, { passive: true }); estadoFlechas(); }
 }
 
 /* ---------- interacción: fotos y colores ---------- */
@@ -1168,6 +1190,14 @@ function elegirVariante(art, k){
   if (a) a.href = enlaceWA(mensaje(p, k));
 }
 tienda.addEventListener('click', e => {
+  const fl = e.target.closest('.flecha');
+  if (fl){
+    const pista = tienda.querySelector('.grabados__pista');
+    const paso = pista.querySelector('img').getBoundingClientRect().width + 12;
+    const suave = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+    pista.scrollBy({ left: Number(fl.dataset.dir) * paso, behavior: suave ? 'smooth' : 'auto' });
+    return;
+  }
   const comp = e.target.closest('[data-compartir]');
   if (comp){ compartir(comp.closest('.producto')); return; }
   const mini = e.target.closest('.mini');
