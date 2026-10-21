@@ -244,6 +244,14 @@ a{ color: inherit; }
 
 .destacado .sticker{ --d: 112px; top: -14px; animation: pegar .55s cubic-bezier(.2, 1.5, .4, 1) .35s both; }
 @keyframes pegar{ from{ opacity: 0; transform: rotate(-30deg) scale(.4); } }
+/* blondas con "mover" en blonda_estilo: se balancean todo el tiempo para llamar la atención */
+@keyframes latido{
+  0%, 100%{ transform: rotate(-9deg) scale(1); }
+  50%{ transform: rotate(-3deg) scale(1.07); }
+}
+.sticker.sticker--mover{ animation: latido 2.4s ease-in-out infinite; }
+.destacado .sticker.sticker--mover{ animation: pegar .55s cubic-bezier(.2, 1.5, .4, 1) .35s both, latido 2.4s ease-in-out .9s infinite; }
+.banda{ overflow-x: clip; }
 
 .ficha{
   position: relative; background: var(--ficha); border-radius: var(--r-ficha);
@@ -359,6 +367,24 @@ a{ color: inherit; }
 .catalogo .pastilla{ font-size: .76rem; letter-spacing: .04em; }
 
 /* ---------- Éxito: un agotado que se muestra como logro ---------- */
+/* ---------- Grabados personalizados: fotos de a pares ---------- */
+.grabados{ max-width: var(--ancho); margin: 0 auto; padding: clamp(56px, 9vw, 104px) var(--lado) 0; scroll-margin-top: 16px; }
+.grabados__texto{ margin-top: 10px; max-width: 32em; font: italic 500 1.2rem/1.35 var(--display); color: var(--naranja-texto); }
+.grabados__grilla{ margin-top: clamp(22px, 4vw, 36px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.grabados__grilla img{ width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 16px; }
+.grabados__cta{
+  aspect-ratio: 4 / 5; border-radius: 16px; padding: 18px;
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 14px;
+  background: var(--verde); color: var(--crema);
+}
+.grabados__cta p{ font: italic 500 clamp(1.3rem, 1rem + 1.6vw, 2rem)/1.15 var(--display); }
+.grabados__cta .boton{ min-height: 46px; max-width: 100%; padding: .55em 1.1em; }
+@media (max-width: 379px){ .grabados__cta{ padding: 14px; } .grabados__cta .boton{ padding-inline: .8em; } .grabados__cta .boton svg{ display: none; } }
+@media (min-width: 720px){
+  .grabados__grilla{ grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  .grabados__cta{ padding: 26px; }
+}
+
 .exito{ margin-top: clamp(56px, 9vw, 104px); background: var(--ficha); }
 .exito .producto{
   max-width: var(--ancho); margin: 0 auto;
@@ -568,7 +594,7 @@ a{ color: inherit; }
 }
 
 @media (prefers-reduced-motion: reduce){
-  .sticker{ animation: none; }
+  .sticker, .sticker.sticker--mover, .destacado .sticker.sticker--mover{ animation: none; }
   .boton, .flotante, .compartir, .copiado{ transition: none; }
   .flotante:hover{ transform: none; }
 }
@@ -632,7 +658,16 @@ const CONFIG = {
   rotuloDestacado: "Destacado de temporada",
 
   // Botón de compartir en cada producto. false = se oculta.
-  compartir: true
+  compartir: true,
+
+  // Sección de grabados personalizados (fotos dentro de img/). Sin fotos, no se muestra.
+  grabados: {
+    titulo: "Grabados personalizados",
+    texto: "Tu diseño, grabado en virolas de alpaca y acero.",
+    fotos: ["grabado-1.jpg", "grabado-2.jpg", "grabado-3.jpg", "grabado-4.jpg",
+            "grabado-5.jpg", "grabado-6.jpg", "grabado-7.jpg"],
+    mensaje: "¡Hola! Quiero consultar por un grabado personalizado."
+  }
 };
 
 /* =====================================================================
@@ -644,6 +679,7 @@ const CONFIG = {
    o "catalogo". agotado: true lo pasa a la sección "Agotados", sin botón de pedido.
    seccion "exito" + agotado: franja grande a color para mostrar un producto que se agotó.
    aviso: pastilla naranja de urgencia, por ejemplo "¡Últimas unidades!".
+   blonda_estilo admite "mover" para que la blonda se balancee todo el tiempo.
    El orden de la lista es el orden en la página.
    ===================================================================== */
 const PRODUCTOS = [
@@ -654,7 +690,7 @@ const PRODUCTOS = [
     "etiqueta": "¡Bombilla de regalo!",
     "aviso": "¡Últimas unidades!",
     "blonda": "Oferta especial",
-    "blonda_estilo": "izquierda",
+    "blonda_estilo": "izquierda mover",
     "frase": "",
     "caracteristicas": [
       "Algarrobo, brilloso laqueado",
@@ -740,7 +776,7 @@ const PRODUCTOS = [
     "etiqueta": "",
     "aviso": "",
     "blonda": "Combo especial",
-    "blonda_estilo": "celeste izquierda",
+    "blonda_estilo": "celeste izquierda mover",
     "frase": "",
     "caracteristicas": [
       "Imperial de goma",
@@ -800,11 +836,11 @@ const PRODUCTOS = [
   },
   {
     "seccion": "catalogo",
-    "nombre": "Combo Mamá",
+    "nombre": "Combo para regalar",
     "precio": 15000,
     "etiqueta": "¡Bombilla de regalo!",
     "aviso": "",
-    "blonda": "Combo Mamá",
+    "blonda": "Combo para regalar",
     "blonda_estilo": "izquierda",
     "frase": "",
     "caracteristicas": [
@@ -948,7 +984,7 @@ function blonda(p){
   const texto = p.blonda.replace(/[¡!]/g, '');
   const larga = Math.max(...texto.split(/\s+/).map(w => w.length));
   const clases = 'sticker' + (color ? ' sticker--' + color : '') + (/izq/.test(estilo) ? ' sticker--izq' : '') +
-                 (larga > 8 ? ' sticker--largo' : '');
+                 (larga > 8 ? ' sticker--largo' : '') + (/mover/.test(estilo) ? ' sticker--mover' : '');
   const N = 36, R = 54;
   let c = '';
   for (let k = 0; k < N; k++){
@@ -1047,6 +1083,19 @@ function htmlExito(p, i){
       (p.etiqueta ? '<p class="exito__mensaje">' + esc(p.etiqueta) + '</p>' : '') +
       lista(p, 'producto__lista', true) + '</div></article></section>';
 }
+function htmlGrabados(){
+  const g = CONFIG.grabados;
+  if (!g || !g.fotos || !g.fotos.length) return '';
+  // fotos de a pares; el lugar que sobra (o uno más al final) es la tarjeta de consulta
+  return '<section class="grabados" id="grabados" aria-labelledby="grab-t"><h2 class="titulo" id="grab-t">' + esc(g.titulo) + '</h2>' +
+    (g.texto ? '<p class="grabados__texto">' + esc(g.texto) + '</p>' : '') +
+    '<div class="grabados__grilla">' +
+      g.fotos.map((f, k) => '<img src="' + esc(src(f)) + '" alt="' + (k ? '' : 'Ejemplo de grabado personalizado') +
+        '" width="960" height="1200" loading="lazy">').join('') +
+      '<div class="grabados__cta"><p>¿Querés el tuyo?</p><a class="boton boton--claro" href="' + esc(enlaceWA(g.mensaje)) +
+        '" target="_blank" rel="noopener">' + ICONO_WA + '<span>Consultar</span></a></div>' +
+    '</div></section>';
+}
 function htmlCatalogo(p, i){
   return '<article class="producto" data-i="' + i + '">' + galeria(p, i) +
     '<div class="producto__info"><h3 class="nombre">' + esc(p.nombre) + '</h3>' +
@@ -1088,6 +1137,7 @@ function pintar(productos){
   if (cat.length) h += '<section class="catalogo" aria-labelledby="cat-t"><h2 class="titulo" id="cat-t">Más modelos</h2>' +
                        '<div class="catalogo__grilla' + (de4 ? ' catalogo__grilla--4' : '') + '">' +
                        cat.map(p => htmlCatalogo(p, idx(p))).join('') + '</div></section>';
+  h += htmlGrabados();
   h += exitos.map(p => htmlExito(p, idx(p))).join('');
   if (agot.length) h += '<section class="catalogo agotados" aria-labelledby="ago-t"><h2 class="titulo" id="ago-t">Agotados</h2>' +
                         '<div class="catalogo__grilla">' + agot.map(p => htmlAgotado(p, idx(p))).join('') + '</div></section>';
@@ -1168,7 +1218,7 @@ function irAlProducto(){
   let id = location.hash.slice(1);
   try{ id = decodeURIComponent(id); }catch(e){}
   const el = document.getElementById(id);
-  if (el && el.classList.contains('producto')) el.scrollIntoView({ block: 'start' });
+  if (el && (el.classList.contains('producto') || el.id === 'grabados')) el.scrollIntoView({ block: 'start' });
 }
 addEventListener('hashchange', () => { tocada = false; irAlProducto(); });
 

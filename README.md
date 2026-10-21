@@ -33,13 +33,16 @@ Cada producto tiene estos datos:
 | `nombre` | Nombre del producto. |
 | `precio` | Solo el número, sin puntos ni signo: `39900`. |
 | `etiqueta` | Texto corto en naranja, por ejemplo `¡Bombilla de regalo!`. |
+| `aviso` | Opcional. Pastilla naranja de urgencia, por ejemplo `¡Últimas unidades!`. Vacío = sin pastilla. |
 | `blonda` | Texto del medallón que va sobre la foto, por ejemplo `Oferta especial`. Vacío = sin medallón. |
-| `blonda_estilo` | Opcional. Color: `celeste`, `verde` o `naranja` (vacío = marrón kraft). Agregá `izquierda` para ponerla del otro lado de la foto. Ejemplo: `celeste izquierda`. |
+| `blonda_estilo` | Opcional. Color: `celeste`, `verde` o `naranja` (vacío = marrón kraft). Agregá `izquierda` para ponerla del otro lado de la foto y `mover` para que se balancee todo el tiempo. Ejemplo: `celeste izquierda mover`. |
 | `frase` | Una frase opcional. |
 | `caracteristicas` | Separadas por una barra vertical: `Algarrobo \| Virola de acero`. |
 | `variantes` | Colores, separados por barra vertical: `Blanco \| Rosa`. La primera variante usa la primera foto, la segunda la segunda, y así. |
 | `fotos` | Nombres de archivo dentro de `img/`, separados por barra vertical. La primera es la principal. |
 | `agotado` | `si` o `no`. Con `si` el producto pasa a la sección "Agotados" al final, con la foto apagada y sin botón de pedido. |
+
+Para mostrar un agotado como logro (foto a color, sello "Agotado" y un mensaje), poné `exito` en `seccion` y `si` en `agotado`. El mensaje va en `etiqueta` y el sello en `blonda`.
 
 El orden de las filas es el orden en la página. Si la cantidad de productos `principal` es impar, el último se muestra en la banda verde de ancho completo.
 
@@ -64,3 +67,7 @@ Desde ese momento los cambios de la planilla se ven en la página sin tocar el c
 ### Opción B: editar en el código
 
 Sin planilla, la página usa la lista `PRODUCTOS` que está en `index.html`, con los mismos campos.
+
+## Grabados personalizados
+
+La sección se arma con el bloque `grabados` dentro de `CONFIG` en `index.html`: título, texto, la lista de fotos (en `img/`) y el mensaje que abre el botón "Consultar". Las fotos se muestran de a pares y la última casilla es la tarjeta de consulta. Para compartir la sección con su propia miniatura: `tiendasiempremate.com.ar/p/grabados/`.
