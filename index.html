@@ -264,7 +264,10 @@ a{ color: inherit; }
 }
 .oferta__ahora{ margin: 4px 0 12px; font: italic 600 clamp(1.8rem, 1.4rem + 1.6vw, 2.4rem)/1 var(--display); color: var(--naranja-cl); }
 .oferta__ahora span, .oferta__antes span{ font-size: .5em; vertical-align: .62em; margin-right: .08em; }
-.oferta .boton{ width: 100%; min-height: 44px; padding: .5em .8em; font-size: .95rem; }
+.oferta .acciones{ width: 100%; flex-wrap: nowrap; gap: 8px; }
+.oferta .boton{ min-height: 44px; padding: .5em .8em; font-size: .95rem; }
+.oferta .compartir{ width: 44px; height: 44px; }
+.oferta .compartir svg{ width: 19px; height: 19px; }
 
 /* precio de antes tachado, en las fichas de producto durante la promo */
 .precios{ display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
@@ -758,8 +761,8 @@ const CONFIG = {
   // CYBER WEEK: franja de ofertas arriba de todo y precios rebajados.
   // Fuera de las fechas no se muestra nada y vuelven los precios normales, sin tocar nada.
   // Los nombres tienen que coincidir con los de la lista de productos (o la planilla).
-  // sinBombilla: true saca, mientras dure la promo, la etiqueta "¡Bombilla de regalo!",
-  // la blonda de combo y la bombilla de las características (y aclara "sin bombilla" en el pedido).
+  // Mientras dure la promo, cada oferta lleva la blonda "Cyber Week".
+  // sinBombilla: true saca la etiqueta "¡Bombilla de regalo!" y la bombilla de las características.
   cyber: {
     desde: "2026-11-03T00:00:00-03:00",
     hasta: "2026-11-06T23:59:59-03:00",
@@ -767,8 +770,8 @@ const CONFIG = {
     etiqueta: "Hasta 25% OFF",
     ofertas: [
       { nombre: "Calabaza",            precio: 14999, detalle: "Recubierto en PVC",  foto: "cyber-calabaza.webp" },
-      { nombre: "Malvinas Argentinas", precio: 18999, detalle: "Negro y blanco · Sin bombilla",     foto: "cyber-malvinas-negro.webp", sinBombilla: true },
-      { nombre: "Camionero",           precio: 19999, detalle: "Algarrobo laqueado · Sin bombilla", foto: "cyber-camionero.webp", sinBombilla: true },
+      { nombre: "Malvinas Argentinas", precio: 18999, detalle: "Negro y blanco",     foto: "cyber-malvinas-negro.webp", sinBombilla: true },
+      { nombre: "Camionero",           precio: 19999, detalle: "Algarrobo laqueado", foto: "cyber-camionero.webp", sinBombilla: true },
       { nombre: "Ranchero",            precio: 24999, detalle: "Rosa y blanco",      foto: "cyber-ranchero-rosa.webp" }
     ]
   },
@@ -1046,7 +1049,7 @@ function enlaceWA(texto){
 function mensaje(p, v){
   let m = '¡Hola! Quiero pedir: ' + p.nombre;
   if (p.variantes.length) m += ', color ' + p.variantes[v || 0];
-  if (p.precio > 0) m += ' (' + precioTexto(p.precio) + (p.antes > p.precio ? ', precio Cyber Week' + (p.sinBombilla ? ', sin bombilla' : '') : '') + ')';
+  if (p.precio > 0) m += ' (' + precioTexto(p.precio) + (p.antes > p.precio ? ', precio Cyber Week' : '') + ')';
   return m + '.';
 }
 
@@ -1252,11 +1255,11 @@ function aplicarCyber(productos){
     const o = p && ofertas[limpio(p.nombre)];
     if (!o || p.agotado || !(p.precio > o.precio)) return p;
     const nuevo = Object.assign({}, p, { antes: p.precio, precio: o.precio });
+    nuevo.blonda = 'Cyber Week';
+    nuevo.blonda_estilo = (/izq/.test(limpio(p.blonda_estilo)) ? 'izquierda ' : '') + 'naranja mover';
     if (o.sinBombilla){
-      nuevo.sinBombilla = true;
       if (/bombilla/i.test(nuevo.etiqueta)) nuevo.etiqueta = '';
-      if (/combo|bombilla/i.test(nuevo.blonda)){ nuevo.blonda = ''; nuevo.blonda_estilo = ''; }
-      nuevo.caracteristicas = (p.caracteristicas || []).filter(c => !/bombilla/i.test(c)).concat('Sin bombilla');
+      nuevo.caracteristicas = (p.caracteristicas || []).filter(c => !/bombilla/i.test(c));
     }
     return nuevo;
   });
@@ -1280,8 +1283,10 @@ function htmlCyber(){
       '<h3>' + esc(p.nombre) + '</h3>' + (o.detalle ? '<p class="oferta__var">' + esc(o.detalle) + '</p>' : '') +
       '<p class="oferta__antes"><span>$</span>' + Number(p.antes).toLocaleString('es-AR') + '</p>' +
       '<p class="oferta__ahora"><span>$</span>' + Number(p.precio).toLocaleString('es-AR') + '</p>' +
-      '<a class="boton boton--claro" href="' + esc(enlaceWA(mensaje(Object.assign({}, p, { variantes: [] }), 0))) + '" target="_blank" rel="noopener">' + ICONO_WA +
+      '<div class="acciones"><a class="boton boton--claro" href="' + esc(enlaceWA(mensaje(Object.assign({}, p, { variantes: [] }), 0))) + '" target="_blank" rel="noopener">' + ICONO_WA +
         '<span>Pedir<span class="solo-lector"> ' + esc(p.nombre) + ' por WhatsApp</span></span></a>' +
+        (CONFIG.compartir ? '<button type="button" class="compartir compartir--claro" data-compartir="' + slug(p.nombre) + '" aria-label="Compartir ' +
+          esc(p.nombre) + '" title="Compartir">' + ICONO_COMPARTIR + '</button>' : '') + '</div>' +
     '</article>';
   }).join('');
   if (!tarjetas) return '';
@@ -1373,7 +1378,7 @@ tienda.addEventListener('click', e => {
     return;
   }
   const comp = e.target.closest('[data-compartir]');
-  if (comp){ compartir(comp.closest('.producto')); return; }
+  if (comp){ compartir(comp.closest('.producto') || document.getElementById(comp.dataset.compartir)); return; }
   const mini = e.target.closest('.mini');
   if (!mini) return;
   const art = mini.closest('.producto');
