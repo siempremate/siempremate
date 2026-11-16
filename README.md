@@ -29,7 +29,7 @@ Cada producto tiene estos datos:
 | Columna | Qué va |
 |---|---|
 | `activo` | `si` o `no`. Con `no` el producto se oculta sin borrarlo. |
-| `seccion` | `oportunidad` (tarjeta naranja compacta arriba de todo, para ofertas de último momento), `destacado` (uno solo), `principal` (tarjetas grandes), `banda` (franja verde de ancho completo; si hay dos seguidas, la segunda va en verde más oscuro y con las fotos del otro lado), `premium` (vitrina oscura de ancho completo, con filete dorado) o `catalogo` (grilla "Más modelos"). |
+| `seccion` | `novedad` (sección "Novedades" arriba de todo, para productos nuevos), `oportunidad` (tarjeta naranja compacta arriba de todo, para ofertas de último momento), `destacado` (uno solo), `principal` (tarjetas grandes), `banda` (franja verde de ancho completo; si hay dos seguidas, la segunda va en verde más oscuro y con las fotos del otro lado), `premium` (vitrina oscura de ancho completo, con filete dorado) o `catalogo` (grilla "Más modelos"). |
 | `nombre` | Nombre del producto. |
 | `precio` | Solo el número, sin puntos ni signo: `39900`. |
 | `etiqueta` | Texto corto en naranja, por ejemplo `¡Bombilla de regalo!`. |
@@ -70,4 +70,11 @@ Sin planilla, la página usa la lista `PRODUCTOS` que está en `index.html`, con
 
 ## Grabados personalizados
 
-La sección se arma con el bloque `grabados` dentro de `CONFIG` en `index.html`: título, texto, la lista de fotos (en `img/`) y el mensaje que abre el botón "Consultar". Las fotos se muestran de a pares y la última casilla es la tarjeta de consulta. Para compartir la sección con su propia miniatura: `tiendasiempremate.com.ar/p/grabados/`.
+La sección se arma con el bloque `grabados` dentro de `CONFIG` en `index.html`: título, texto, la lista de fotos (en `img/`) y el mensaje que abre el botón "Consultar". Las fotos se muestran en una galería deslizable (con el dedo o con las flechas), junto al título y el botón. Para compartir la sección con su propia miniatura: `tiendasiempremate.com.ar/p/grabados/`.
+
+## SEO
+
+- `index.html` trae título, descripción, dirección canónica y datos estructurados (la tienda y cada producto con su precio) para Google.
+- El contenido de los productos está escrito dentro de la página (entre `<!--PRERENDER-->` y `<!--/PRERENDER-->`) para que Google lo lea sin esperar a que cargue nada. Si cambiás productos o precios a mano, avisá para regenerarlo.
+- `robots.txt` y `sitemap.xml` van en la raíz del repositorio.
+- Pasos recomendados: dar de alta la tienda en Google Search Console, enviar el sitemap y crear el perfil de Google Business.
